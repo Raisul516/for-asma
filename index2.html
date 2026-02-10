@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Asma 💗</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      :root {
+        --bg-gradient-start: #fce7f3;
+        --bg-gradient-end: #e0f2fe;
+        --accent: #fb7185;
+        --text-main: #111827;
+        --text-soft: #4b5563;
+        --card-bg: rgba(255, 255, 255, 0.92);
+        --shadow: 0 28px 90px rgba(15, 23, 42, 0.24);
+        --radius-lg: 30px;
+        --radius-md: 20px;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Segoe UI", sans-serif;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top left, #fecaca 0, transparent 50%),
+          radial-gradient(circle at bottom right, #bfdbfe 0, transparent 55%),
+          linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+        color: var(--text-main);
+        overflow: hidden; /* full screen app feel */
+      }
+
+      /* ✅ FULLSCREEN FRAME */
+      .frame {
+        width: 100vw;
+        height: 100vh;
+        padding: clamp(14px, 2vw, 28px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .frame::before,
+      .frame::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(26px);
+        opacity: 0.65;
+        z-index: 0;
+      }
+
+      .frame::before {
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, #f9a8d4, transparent 60%);
+        top: -120px;
+        right: -90px;
+      }
+
+      .frame::after {
+        width: 340px;
+        height: 340px;
+        background: radial-gradient(circle, #bfdbfe, transparent 60%);
+        bottom: -140px;
+        left: -110px;
+      }
+
+      .shell {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        border-radius: var(--radius-lg);
+        background: rgba(255,255,255,0.55);
+        border: 1px solid rgba(255,255,255,0.8);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+        padding: clamp(16px, 2.4vw, 28px);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      h1 {
+        font-size: clamp(22px, 3vw, 36px);
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+      }
+
+      .highlight {
+        background: linear-gradient(120deg, #fb7185, #ec4899);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 800;
+      }
+
+      .small-note {
+        font-size: 12px;
+        color: var(--text-soft);
+        max-width: 680px;
+        line-height: 1.5;
+      }
+
+      .btn {
+        border: 1px solid rgba(255,255,255,0.9);
+        background: rgba(255,255,255,0.65);
+        padding: 10px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 12px;
+        box-shadow: 0 10px 28px rgba(15,23,42,0.10);
+        transition: transform 160ms ease;
+        user-select: none;
+      }
+      .btn:hover { transform: translateY(-1px); }
+      .btn:active { transform: translateY(0px) scale(0.99); }
+
+      .main {
+        flex: 1;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 2fr);
+        gap: 16px;
+        align-items: stretch;
+      }
+
+      .hero-card {
+        background: linear-gradient(135deg, rgba(251, 113, 133, 0.95), rgba(236, 72, 153, 0.9));
+        border-radius: var(--radius-lg);
+        padding: 22px;
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at top left, rgba(254, 249, 195, 0.28), transparent 65%),
+          radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.35), transparent 65%);
+        mix-blend-mode: screen;
+        opacity: 0.85;
+        pointer-events: none;
+      }
+
+      .hero-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; }
+      .hero-title { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.9; font-weight: 700; }
+      .hero-name { font-size: clamp(26px, 3.6vw, 38px); font-weight: 900; letter-spacing: -0.05em; }
+      .hero-text { font-size: 14px; line-height: 1.65; opacity: 0.95; }
+
+      .hero-footer {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 14px;
+      }
+
+      .avatar-main {
+        width: 54px;
+        height: 54px;
+        border-radius: 20px;
+        background: rgba(15, 23, 42, 0.16);
+        border: 2px solid rgba(248, 250, 252, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+      }
+
+      .grid-wrap {
+        border-radius: var(--radius-lg);
+        background: rgba(255,255,255,0.60);
+        border: 1px solid rgba(255,255,255,0.85);
+        padding: 12px;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .grid-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding: 4px 6px;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .grid-title { font-weight: 900; letter-spacing: -0.02em; }
+      .grid-sub { font-size: 12px; color: var(--text-soft); }
+
+      .grid {
+        flex: 1;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        overflow: auto;
+        padding: 6px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(148, 163, 184, 0.7) transparent;
+      }
+
+      .reason-card {
+        background: var(--card-bg);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        border: 1px solid rgba(226, 232, 240, 0.9);
+        box-shadow: 0 12px 30px rgba(148, 163, 184, 0.22);
+        cursor: pointer;
+        transition: transform 220ms ease;
+      }
+      .reason-card:hover { transform: translateY(-4px); }
+
+      .reason-image-wrap {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        background: #e5e7eb;
+      }
+
+      .reason-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .reason-body { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+      .reason-title { font-size: 14px; font-weight: 900; }
+      .reason-text { font-size: 12px; color: var(--text-soft); line-height: 1.45; }
+
+      .footer-note {
+        text-align: center;
+        font-size: 12px;
+        color: rgba(71,85,105,0.9);
+      }
+
+      /* ✅ Modal */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(2,6,23,0.60);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        z-index: 999;
+      }
+      .modal.show { display: flex; }
+
+      .modal-card {
+        width: min(920px, 100%);
+        border-radius: 26px;
+        overflow: hidden;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0 30px 120px rgba(2,6,23,0.45);
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+      }
+
+      .modal-img {
+        width: 100%;
+        height: 100%;
+        min-height: 320px;
+        object-fit: cover;
+        background: #e5e7eb;
+      }
+
+      .modal-side {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .modal-title { font-size: 18px; font-weight: 950; }
+      .modal-text { font-size: 13px; color: #334155; line-height: 1.65; }
+
+      .close {
+        margin-top: auto;
+        border: none;
+        background: rgba(2,6,23,0.08);
+        padding: 10px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-weight: 800;
+      }
+
+      @media (max-width: 980px) {
+        body { overflow: auto; }
+        .frame { overflow: auto; }
+        .shell { height: auto; min-height: 100vh; }
+        .main { grid-template-columns: 1fr; }
+        .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+
+      @media (max-width: 560px) {
+        .grid { grid-template-columns: 1fr; }
+        .modal-card { grid-template-columns: 1fr; }
+        .modal-img { min-height: 250px; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="frame">
+      <div class="shell">
+        <div class="top">
+          <div>
+            <h1><span class="highlight">Today is your day</span> ✨</h1>
+            <p class="small-note">
+              A small page made with photos + memories. Tap any card to open it ❤️
+            </p>
+          </div>
+          <button class="btn" id="scrollBtn">⬇️ Jump to photos</button>
+        </div>
+
+        <div class="main">
+          <section class="hero-card">
+            <div class="hero-content">
+              <div class="hero-title">Happy Birthday</div>
+              <div class="hero-name">Asma 💗</div>
+              <p class="hero-text">
+                Happy Birthday, Asma. Thank you for being my friend all these years. I really appreciate your presence in my life. Youre a very sweet friend of mine.  
+              </p>
+            </div>
+            <div class="hero-footer">
+              <div class="avatar-main">🎂</div>
+              <p style="font-size: 12px; opacity: 0.9;">Made for you with love</p>
+            </div>
+          </section>
+
+          <section class="grid-wrap" id="photosTop">
+            <div class="grid-head">
+              <div>
+                <div class="grid-title">Little reasons I appreciate you</div>
+                <div class="grid-sub">Click a card to open it 💗</div>
+              </div>
+              <div class="grid-sub" id="count"></div>
+            </div>
+
+            <div class="grid" id="reasonsGrid"></div>
+          </section>
+        </div>
+
+        <p class="footer-note">
+          Happy Birthday, Asma. Hope today is as special as you are. 💗
+        </p>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+      <div class="modal-card">
+        <img class="modal-img" id="modalImg" alt="" />
+        <div class="modal-side">
+          <div class="modal-title" id="modalTitle"></div>
+          <div class="modal-text" id="modalText"></div>
+          <button class="close" id="closeBtn">Close ✕</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const memories = [
+        { title: "Your smile", text: "One real smile from you can flip my whole day. The room just gets lighter when you’re happy.", image: "image1.jpg" },
+        { title: "The way you care", text: "You notice the tiny details most people ignore. You have a way of making people feel seen.", image: "image2.jpg" },
+        { title: "Our stupid jokes", text: "We could talk about nothing and still laugh like idiots. Late-night chats with you are the best.", image: "image3.jpg" },
+        { title: "How safe you feel", text: "Around you, I don’t have to pretend. I can be myself, and you’re still there. That's rare.", image: "image4.jpg" },
+        { title: "Your little chaos", text: "You’re a mix of soft, dramatic, and adorable — and it fits perfectly into one person.", image: "image5.jpg" },
+        { title: "Your Strength", text: "The way you handle your life and your problems is something I admire a lot. You are a strong person and I am proud of you.", image: "image6.jpg" },
+        { title: "Your softness", text: "Even when you act tough, I know there’s a gentle heart under it all. I never want to lose that.", image: "image7.jpg" },
+        { title: "Simply, you", text: "Out of everyone, there is only one you. I’m just insanely grateful I met you.", image: "image8.jpg" },
+      ];
+
+      const grid = document.getElementById("reasonsGrid");
+      const count = document.getElementById("count");
+      count.textContent = `${memories.length} memories`;
+
+      const modal = document.getElementById("modal");
+      const modalImg = document.getElementById("modalImg");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalText = document.getElementById("modalText");
+
+      function openModal(item){
+        modalTitle.textContent = item.title;
+        modalText.textContent = item.text;
+        modalImg.src = item.image;
+        modalImg.alt = item.title;
+        modal.classList.add("show");
+      }
+
+      function closeModal(){
+        modal.classList.remove("show");
+      }
+
+      document.getElementById("closeBtn").addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+      window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+      memories.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "reason-card";
+        card.innerHTML = `
+          <div class="reason-image-wrap">
+            <img class="reason-image" src="${item.image}" alt="${item.title}" loading="lazy"
+              onerror="this.style.display='none'; this.parentElement.style.background='#e5e7eb';" />
+          </div>
+          <div class="reason-body">
+            <div class="reason-title">${item.title}</div>
+            <p class="reason-text">${item.text}</p>
+          </div>
+        `;
+        card.addEventListener("click", () => openModal(item));
+        grid.appendChild(card);
+      });
+
+      document.getElementById("scrollBtn").addEventListener("click", () => {
+        document.getElementById("photosTop").scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    </script>
+  </body>
+</html>
